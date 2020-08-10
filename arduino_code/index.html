@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="cn" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Fun | Fun</title><meta name="description" content="复制粘贴工程师专用工具      .textarea-inherit {         width: 100%;         overflow: auto;         word-break: break-all; &#x2F;&#x2F;解决兼容问题     }     GPIO初始化      #define XX_GPIO_PIN HAL_GPIO_PIN_P0_3 #define XX_IOM"><meta name="author" content="zhoushenglin"><meta name="copyright" content="zhoushenglin"><meta name="format-detection" content="telephone=no"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://www.orangetech.fun/bes_code_gen/"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//fonts.googleapis.com" crossorigin="crossorigin"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta property="og:type" content="website"><meta property="og:title" content="Fun"><meta property="og:url" content="http://www.orangetech.fun/bes_code_gen/"><meta property="og:site_name" content="Fun"><meta property="og:description" content="复制粘贴工程师专用工具      .textarea-inherit {         width: 100%;         overflow: auto;         word-break: break-all; &#x2F;&#x2F;解决兼容问题     }     GPIO初始化      #define XX_GPIO_PIN HAL_GPIO_PIN_P0_3 #define XX_IOM"><meta property="og:image" content="https://i.loli.net/2020/07/24/RMB739FgQeTSnhk.jpg"><meta property="article:published_time" content="2020-08-07T06:24:03.825Z"><meta property="article:modified_time" content="2020-08-07T06:24:03.825Z"><meta name="twitter:card" content="summary"><script>var activateDarkMode = function () {
+<!DOCTYPE html><html lang="cn" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Fun | Fun</title><meta name="description" content="复制粘贴工程师专用工具 Arduino      .textarea-inherit {         width: 100%;         overflow: auto;         word-break: break-all; &#x2F;&#x2F;解决兼容问题     }     GPIO初始化      #define XX_GPIO_PIN 1 &#x2F;&#x2F;1,2,3,.....A0,A1,A2."><meta name="author" content="zhoushenglin"><meta name="copyright" content="zhoushenglin"><meta name="format-detection" content="telephone=no"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://www.orangetech.fun/arduino_code/"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//fonts.googleapis.com" crossorigin="crossorigin"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta property="og:type" content="website"><meta property="og:title" content="Fun"><meta property="og:url" content="http://www.orangetech.fun/arduino_code/"><meta property="og:site_name" content="Fun"><meta property="og:description" content="复制粘贴工程师专用工具 Arduino      .textarea-inherit {         width: 100%;         overflow: auto;         word-break: break-all; &#x2F;&#x2F;解决兼容问题     }     GPIO初始化      #define XX_GPIO_PIN 1 &#x2F;&#x2F;1,2,3,.....A0,A1,A2."><meta property="og:image" content="https://i.loli.net/2020/07/24/RMB739FgQeTSnhk.jpg"><meta property="article:published_time" content="2020-08-10T11:23:02.669Z"><meta property="article:modified_time" content="2020-08-10T11:23:02.669Z"><meta name="twitter:card" content="summary"><script>var activateDarkMode = function () {
   document.documentElement.setAttribute('data-theme', 'dark')
   if (document.querySelector('meta[name="theme-color"]') !== null) {
     document.querySelector('meta[name="theme-color"]').setAttribute('content', '#000')
@@ -89,7 +89,7 @@ if (autoChangeMode === '1') {
   isHome: false,
   isHighlightShrink: false,
   isSidebar: false,
-  postUpdate: '2020-08-07 14:24:03'
+  postUpdate: '2020-08-10 19:23:02'
 }</script><noscript><style>
 #nav {
   opacity: 1
@@ -101,6 +101,7 @@ if (autoChangeMode === '1') {
 <html>
 <body>
 <h1>复制粘贴工程师专用工具</h1>
+<h2>Arduino</h2>
 <p>
 
 </p>
@@ -117,61 +118,48 @@ if (autoChangeMode === '1') {
 <p>
 GPIO初始化
 </p>   
-<textarea class="textarea-inherit" rows ="35";>
-#define XX_GPIO_PIN HAL_GPIO_PIN_P0_3
-#define XX_IOMUX_PIN HAL_IOMUX_PIN_P0_3
-
-const struct HAL_IOMUX_PIN_FUNCTION_MAP xx_io_cfg[1] =
-{
-    {XX_IOMUX_PIN, HAL_IOMUX_FUNC_AS_GPIO, HAL_IOMUX_PIN_VOLTAGE_VIO, HAL_IOMUX_PIN_PULLUP_ENALBE},
-};
+<textarea class="textarea-inherit" rows ="25";>
+#define XX_GPIO_PIN 1
+//1,2,3,.....A0,A1,A2...
 
 void xx_gpio_init(void)
 {
-    hal_iomux_init(xx_io_cfg, 1);
-    hal_gpio_pin_set_dir((enum HAL_GPIO_PIN_T) xx_io_cfg[0].pin, HAL_GPIO_DIR_IN, 1);
-    // uart_gpiokey_enable_irq(RX_GPIO_PIN, HAL_GPIO_IRQ_POLARITY_LOW_FALLING);
+    pinMode(XX_GPIO_PIN,OUTPUT);
 }
 bool xx_gpio_read(void)
 {
-    hal_iomux_init(xx_io_cfg, 1);
-    hal_gpio_pin_set_dir((enum HAL_GPIO_PIN_T) xx_io_cfg[0].pin, HAL_GPIO_DIR_IN, 1);
-    return hal_gpio_pin_get_val(XX_GPIO_PIN);
-
+    pinMode(XX_GPIO_PIN,INPUT);
+    return digitalRead(XX_GPIO_PIN);
 }
 
 void xx_gpio_write(bool b)
 {
-    hal_iomux_init(xx_io_cfg, 1);
-    hal_gpio_pin_set_dir((enum HAL_GPIO_PIN_T) xx_io_cfg[0].pin, HAL_GPIO_DIR_OUT, 1);
+    pinMode(XX_GPIO_PIN,OUTPUT);
     if(b)
-        hal_gpio_pin_set(XX_GPIO_PIN);
+        digitalWrite(XX_GPIO_PIN, HIGH);
     else
-        hal_gpio_pin_clr(XX_GPIO_PIN);
+        digitalWrite(XX_GPIO_PIN, LOW);
 }
-
 		
 </textarea>
 
 <p>
 GPIO中断
 </p> 
-<textarea class="textarea-inherit" rows ="28";>
+<textarea class="textarea-inherit" rows ="25";>
 void xx_enable_irq(void)
 {
-    hal_iomux_init(xx_io_cfg, 1);
-    hal_gpio_pin_set_dir((enum HAL_GPIO_PIN_T) xx_io_cfg[0].pin, HAL_GPIO_DIR_IN, 1);
-    hal_gpiokey_enable_irq(XX_GPIO_PIN, HAL_GPIO_IRQ_POLARITY_LOW_FALLING);
+    pinMode(XX_GPIO_PIN, INPUT_PULLUP);
+    attachInterrupt(digitalPinToInterrupt(XX_GPIO_PIN), pwm_in_irqhandle, RISING);//LOW,CHANGE ,RISING ,FALLING ,HIGH
 }
 void xx_disable_irq(void)
 {
-    hal_gpiokey_disable_irq(XX_GPIO_PIN);
+    detachInterrupt(digitalPinToInterrupt(XX_GPIO_PIN));
 }
 void xx_irqhandler(enum HAL_GPIO_PIN_T pin)
 {
 
-    BOX_TRACE(" hal irq");
-    hal_gpiokey_disable_irq(XX_GPIO_PIN);
+    Serial.println(" hal irq");
     /*
     APP_MESSAGE_BLOCK msg;
     msg.mod_id          = APP_MODUAL_XX;
@@ -185,158 +173,148 @@ void xx_irqhandler(enum HAL_GPIO_PIN_T pin)
 		
 </textarea>
 <p>
-mail
+pwm
 </p> 
-<textarea class="textarea-inherit" rows ="25";>
-void xx_msg2boxprocess(uint8_t evt)
+<textarea class="textarea-inherit" rows ="53";>
+// Set pin 9's PWM frequency to 3906 Hz (31250/8 = 3906)
+// Note that the base frequency for pins 3, 9, 10, and 11 is 31250 Hz
+//pwm_freq_set(9, 8);
+// Set pin 6's PWM frequency to 62500 Hz (62500/1 = 62500)
+// Note that the base frequency for pins 5 and 6 is 62500 Hz
+//pwm_freq_set(6, 1);
+// Set pin 10's PWM frequency to 31 Hz (31250/1024 = 31)
+//pwm_freq_set(10, 1024);
+void pwm_freq_set(int pin, int divisor)
 {
-    APP_MESSAGE_BLOCK msg;
-    msg.mod_id          = APP_MODUAL_XX;
-    msg.msg_body.message_id = evt;
-    msg.msg_body.message_ptr = (uint32_t) NULL;
-    app_mailbox_put(&msg);
-}
-int xx_process(APP_MESSAGE_BODY * msg)
-{
-    switch (msg->message_id)
+    byte mode;
+    if(pin == 5 || pin == 6 || pin == 9 || pin == 10)
     {
-        case FEED_DOG_EVT:
-            //your code
-            break;
+        switch(divisor)
+        {
+            case 1:
+                mode = 0x01;
+                break;
+            case 8:
+                mode = 0x02;
+                break;
+            case 64:
+                mode = 0x03;
+                break;
+            case 256:
+                mode = 0x04;
+                break;
+            case 1024:
+                mode = 0x05;
+                break;
+            default:
+                return;
+        }
+        if(pin == 5 || pin == 6)
+        {
+            TCCR0B = TCCR0B & 0b11111000 | mode;
+        }
+        else
+        {
+            TCCR1B = TCCR1B & 0b11111000 | mode;
+        }
     }
-    return 0;
+    else if(pin == 3 || pin == 11)
+    {
+        switch(divisor)
+        {
+            case 1:
+                mode = 0x01;
+                break;
+            case 8:
+                mode = 0x02;
+                break;
+            case 32:
+                mode = 0x03;
+                break;
+            case 64:
+                mode = 0x04;
+                break;
+            case 128:
+                mode = 0x05;
+                break;
+            case 256:
+                mode = 0x06;
+                break;
+            case 1024:
+                mode = 0x7;
+                break;
+            default:
+                return;
+        }
+        TCCR2B = TCCR2B & 0b11111000 | mode;
+    }
 }
-int xx_process_init(void)
+void pwm_gpio_init(void)
 {
-    app_set_threadhandle(APP_MODUAL_XX, xx_process);
+    pinMode(XX_GPIO_PIN,OUTPUT);
+}
+void pwm_dutecycle_set(int pin,int persent)
+{
+    int val=0;
+    val=map(persent,0,100,0,255);
+    analogWrite(pin,val);
 }
 </textarea>
 
 <p>
 timer
 </p> 
-<textarea class="textarea-inherit" rows ="35";>
+<textarea class="textarea-inherit" rows ="25";>
+//install mstimer2 lib
+#include <MsTimer2.h>
 
-void xx_timerhandler(void const * param);
-
-osTimerDef(XX_TIMER, xx_timerhandler);
-osTimerId xx_timer = NULL;
 #define XX_TIME_MS 1000
+
 void xx_timerhandler(void const * param)
 {
-    TRACE("xx_timehandler");
+    Serial.println("xx_timehandler");
 //your code
 }
 
-void xx_timer_start(void)
+void xx_timer_start(unsigned int ms)
 {
-    TRACE("xx_timer_start");
-    if (xx_timer == NULL)
-    {
-        xx_timer = osTimerCreate(osTimer(XX_TIMER), osTimerPeriodic, NULL);
-        xx_timer = osTimerCreate(osTimer(XX_TIMER), osTimerOnce, NULL);
-        osTimerStop(xx_timer);
-    }
-    osTimerStart(xx_timer,XX_TIME_MS);
+    Serial.println("xx_timer_start");
+    MsTimer2::set(ms, xx_timerhandler);
+    MsTimer2::start();
 }
 void xx_timer_stop(void)
 {
-    TRACE("xx_timer_stop");
-    if (xx_timer != NULL)
-    {
-        osTimerStop(box_chg_timer);
-    }
+    Serial.println("xx_timer_stop");
+    MsTimer2::stop();
 }
 
 </textarea>
 
 <p>
-nv
+时间函数
 </p> 
-<textarea class="textarea-inherit" rows ="28";>
-
-void nv_write_xx_flag(bool val)
-
-{
-    struct nvrecord_env_t *nvrecord_env;
-    nv_record_env_get(&nvrecord_env);
-    if(nvrecord_env->xx_flag!=val)
-    {
-        nvrecord_env->xx_flag=val;
-        nv_record_env_set(nvrecord_env);
-        TRACE("nv_write_xx_flag %d",val);
-        nv_record_flash_flush();
-    }
-    else
-        return;
-}
-bool nv_read_xx_flag(void)
-{
-    struct nvrecord_env_t *nvrecord_env;
-    nv_record_env_get(&nvrecord_env);
-    TRACE("nv_read_xx_flag %d",nvrecord_env->xx_flag);
-    return (nvrecord_env->xx_flag);
-
-}
+<textarea class="textarea-inherit" rows ="8";>
+delay(ms);
+delayMicroseconds(us);
+ms=millis();
+us=micros();
 
 </textarea>
 
 <p>
 i2c
 </p> 
-<textarea class="textarea-inherit" rows ="56";>
-#define ADDR 0x01
-uint32_t xx_open(void)
-{
-    static const struct HAL_GPIO_I2C_CONFIG_T i2c_cfg= {HAL_GPIO_PIN_P2_0,HAL_GPIO_PIN_P2_1,10};
-    hal_gpio_i2c_open(&i2c_cfg);
-    //add sensor init code
-    //...
-    return 0;
-}
+<textarea class="textarea-inherit" rows ="5";>
+todo
 
-/* i2c write */
-static int I2C_WriteByte(uint8_t reg_addr, uint8_t value)
-{
-    uint8_t buf[2];
-    buf[0] = reg_addr;
-    buf[1] = value;
-    uint32_t ret=0;
-    ret= hal_gpio_i2c_simple_send(ADDR,buf,2);
-    TRACE("hal_gpio_i2c_simple_send ret=%d ",ret);
-    return ret;
-}
 
-static int I2C_WriteWord(uint8_t reg_addr, uint16_t value)
-{
-    uint8_t buf[3];
-    buf[0] = reg_addr;
-    buf[1] = (uint8_t)(value&0xff);
-    buf[2] = (uint8_t)(value>>8);
-    uint32_t ret=0;
-    ret= hal_gpio_i2c_simple_send(ADDR,buf,3);
-    TRACE("hal_gpio_i2c_simple_send ret=%d ",ret);
-    return ret;
-}
-static int I2C_ReadByte(uint8_t reg_addr, uint8_t *value)
-{
-    //uint8_t buf[2]={0,0};
-    uint32_t ret=0;
-    ret= hal_gpio_i2c_simple_recv(ADDR,&reg_addr,1,value,1);
-    TRACE("hal_gpio_i2c_simple_send ret=%d ",ret);
-    return ret;
+</textarea>
 
-}
-
-static int I2C_ReadWord(uint8_t reg_addr, uint16_t *value)
-{
-    uint8_t buf[2]= {0,0};
-    uint32_t ret=0;
-    ret= hal_gpio_i2c_simple_recv(ADDR,&reg_addr,1,buf,2);
-    TRACE("hal_gpio_i2c_simple_send ret=%d ",ret);
-    *value=(uint16_t)buf[0]|(uint16_t)buf[1]<<8;
-    return ret;
-}
+<p>
+spi
+</p> 
+<textarea class="textarea-inherit" rows ="5";>
+todo
 
 
 </textarea>
