@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="cn" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Fun | Fun</title><meta name="description" content="文本处理工具       .textarea-inherit {         width: 100%;         overflow: auto;         word-break: break-all; &#x2F;&#x2F;解决兼容问题     }     输入文本             字数：           function change(){                  va"><meta name="author" content="zhoushenglin"><meta name="copyright" content="zhoushenglin"><meta name="format-detection" content="telephone=no"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://www.orangetech.fun/text_tool/"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//fonts.googleapis.com" crossorigin="crossorigin"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta property="og:type" content="website"><meta property="og:title" content="Fun"><meta property="og:url" content="http://www.orangetech.fun/text_tool/"><meta property="og:site_name" content="Fun"><meta property="og:description" content="文本处理工具       .textarea-inherit {         width: 100%;         overflow: auto;         word-break: break-all; &#x2F;&#x2F;解决兼容问题     }     输入文本             字数：           function change(){                  va"><meta property="og:image" content="https://i.loli.net/2020/07/24/RMB739FgQeTSnhk.jpg"><meta property="article:published_time" content="2020-09-14T16:38:05.684Z"><meta property="article:modified_time" content="2020-09-14T16:38:05.684Z"><meta name="twitter:card" content="summary"><script>var activateDarkMode = function () {
+<!DOCTYPE html><html lang="cn" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Fun | Fun</title><meta name="description" content="文本处理工具       .textarea-inherit {         width: 100%;         overflow: auto;         word-break: break-all; &#x2F;&#x2F;解决兼容问题     }     输入文本      输入字符:           字数：           function change(){         va"><meta name="author" content="zhoushenglin"><meta name="copyright" content="zhoushenglin"><meta name="format-detection" content="telephone=no"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://www.orangetech.fun/text_tool/"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//fonts.googleapis.com" crossorigin="crossorigin"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta property="og:type" content="website"><meta property="og:title" content="Fun"><meta property="og:url" content="http://www.orangetech.fun/text_tool/"><meta property="og:site_name" content="Fun"><meta property="og:description" content="文本处理工具       .textarea-inherit {         width: 100%;         overflow: auto;         word-break: break-all; &#x2F;&#x2F;解决兼容问题     }     输入文本      输入字符:           字数：           function change(){         va"><meta property="og:image" content="https://i.loli.net/2020/07/24/RMB739FgQeTSnhk.jpg"><meta property="article:published_time" content="2020-09-15T01:35:02.712Z"><meta property="article:modified_time" content="2020-09-15T01:35:02.712Z"><meta name="twitter:card" content="summary"><script>var activateDarkMode = function () {
   document.documentElement.setAttribute('data-theme', 'dark')
   if (document.querySelector('meta[name="theme-color"]') !== null) {
     document.querySelector('meta[name="theme-color"]').setAttribute('content', '#000')
@@ -89,7 +89,7 @@ if (autoChangeMode === '1') {
   isHome: false,
   isHighlightShrink: false,
   isSidebar: false,
-  postUpdate: '2020-09-15 00:38:05'
+  postUpdate: '2020-09-15 09:35:02'
 }</script><noscript><style>
 #nav {
   opacity: 1
@@ -119,7 +119,10 @@ if (autoChangeMode === '1') {
 输入文本
 </p>   
 <textarea class="textarea-inherit" rows ="15" id="input_text" onBlur="display_len()"></textarea>
-<input type="submit" value="插入空格" onclick="change()"/> 
+输入字符: <br>
+<input type="text" name="输入字符" id="ins_char_id" value=, />
+<input type="submit" value="插入字符" onclick="change()"/> 
+
 <input type="submit" value="字符倒序" onclick="rev()"/> 
 <input type="submit" value="清空" onclick="clean()"/> 
 <p id="out_len">
@@ -130,13 +133,13 @@ if (autoChangeMode === '1') {
 
 <script>
     function change(){
-        
+        var ins_char = document.getElementById("ins_char_id").value;
         var text_in = document.getElementById("input_text");
 		var text_out;
 		var len_in=text_in.value.length;
 		
 		//alert(text_in.value.length);
-		text_out=text_in.value.split('').join(' ');
+		text_out=text_in.value.split('').join(ins_char);
         text_in.value = text_out; 
 		
 		document.getElementById("out_len").innerHTML = "字数："+text_in.value.length;
