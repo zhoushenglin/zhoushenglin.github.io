@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="cn" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Fun | Fun</title><meta name="description" content="复制粘贴工程师专用工具 freertos      .textarea-inherit {         width: 100%;         overflow: auto;         word-break: break-all; &#x2F;&#x2F;解决兼容问题     }     多任务      #include &quot;FreeRTOSConfig.h&quot; &#x2F;&#x2F;freertos相关配置 #inc"><meta name="author" content="zhoushenglin"><meta name="copyright" content="zhoushenglin"><meta name="format-detection" content="telephone=no"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://www.orangetech.fun/freertos/"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//fonts.googleapis.com" crossorigin="crossorigin"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta property="og:type" content="website"><meta property="og:title" content="Fun"><meta property="og:url" content="http://www.orangetech.fun/freertos/"><meta property="og:site_name" content="Fun"><meta property="og:description" content="复制粘贴工程师专用工具 freertos      .textarea-inherit {         width: 100%;         overflow: auto;         word-break: break-all; &#x2F;&#x2F;解决兼容问题     }     多任务      #include &quot;FreeRTOSConfig.h&quot; &#x2F;&#x2F;freertos相关配置 #inc"><meta property="og:image" content="https://i.loli.net/2020/07/24/RMB739FgQeTSnhk.jpg"><meta property="article:published_time" content="2020-10-20T06:56:53.280Z"><meta property="article:modified_time" content="2020-10-20T06:56:53.280Z"><meta name="twitter:card" content="summary"><script>var activateDarkMode = function () {
+<!DOCTYPE html><html lang="cn" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Fun | Fun</title><meta name="description" content="复制粘贴工程师专用工具      .textarea-inherit {         width: 100%;         overflow: auto;         word-break: break-all; &#x2F;&#x2F;解决兼容问题     }     文件操作      using System;  public class Class1 { 	 	static void Mai"><meta name="author" content="zhoushenglin"><meta name="copyright" content="zhoushenglin"><meta name="format-detection" content="telephone=no"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://www.orangetech.fun/c_/"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//fonts.googleapis.com" crossorigin="crossorigin"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta property="og:type" content="website"><meta property="og:title" content="Fun"><meta property="og:url" content="http://www.orangetech.fun/c_/"><meta property="og:site_name" content="Fun"><meta property="og:description" content="复制粘贴工程师专用工具      .textarea-inherit {         width: 100%;         overflow: auto;         word-break: break-all; &#x2F;&#x2F;解决兼容问题     }     文件操作      using System;  public class Class1 { 	 	static void Mai"><meta property="og:image" content="https://i.loli.net/2020/07/24/RMB739FgQeTSnhk.jpg"><meta property="article:published_time" content="2021-11-17T11:54:48.412Z"><meta property="article:modified_time" content="2021-11-17T11:54:48.412Z"><meta name="twitter:card" content="summary"><script>var activateDarkMode = function () {
   document.documentElement.setAttribute('data-theme', 'dark')
   if (document.querySelector('meta[name="theme-color"]') !== null) {
     document.querySelector('meta[name="theme-color"]').setAttribute('content', '#000')
@@ -89,7 +89,7 @@ if (autoChangeMode === '1') {
   isHome: false,
   isHighlightShrink: false,
   isSidebar: false,
-  postUpdate: '2020-10-20 14:56:53'
+  postUpdate: '2021-11-17 19:54:48'
 }</script><noscript><style>
 #nav {
   opacity: 1
@@ -101,7 +101,6 @@ if (autoChangeMode === '1') {
 <html>
 <body>
 <h1>复制粘贴工程师专用工具</h1>
-<h2>freertos</h2>
 <p>
 
 </p>
@@ -116,93 +115,74 @@ if (autoChangeMode === '1') {
 
 </style>
 <p>
-多任务
+文件操作
 </p>   
-<textarea class="textarea-inherit" rows ="37";>
-#include "FreeRTOSConfig.h" //freertos相关配置
-#include "FreeRTOS.h" //相关api
-QueueHandle_t ui_queue;//ui task的消息队列
-typedef struct 
+<textarea class="textarea-inherit" rows ="25";>
+using System;
+
+public class Class1
 {
-	int a;
-	int b;
-}ui_msg_t;
-void my_task(void *p)
-{
-	while(1)
+	
+	static void Main()
 	{
-		vTaskDelay(1000 / portTICK_PERIOD_MS);
+		FileStream file = new FileStream("./log.txt", FileMode.Create);//创建文件
+		string str = "hello world";
+		byte[] myByte = System.Text.Encoding.UTF8.GetBytes(str);
+		file.Write(myByte);
+		file.Close();
+		//读取文件
+		file = new FileStream("./log.txt", FileMode.Open);
+		long len=file.Length;
+		byte[] myByte2=new byte[len];
+		file.Read(myByte2);
+		string str2 = System.Text.Encoding.UTF8.GetString(myByte2);
+		Console.WriteLine(str2);
+		file.Close();
+		Console.ReadKey();
 	}
 }
 
-void ui_task_init(void)
-{
-	ui_queue = xQueueCreate( 10, sizeof( ui_msg_t ) );
-	
-  	if( ui_queue == 0 )
-  	{
-  		// Failed to create the queue.
-  		Serial.print("Failed to create the ui_queue. ");
-  		while(1);
-  	}
-}
-void sendmsg2_ui_task(ui_msg_t *msg)//给ui task发送消息
-{
-	
-	 if( ui_queue != 0 )
-   {
-       // Send an uint32_t.  Wait for 10 ticks for space to become
-       // available if necessary.
-       if( xQueueSend( ui_queue, msg,( TickType_t ) 10 ) != pdPASS )
-       {
-           // Failed to post the message, even after 10 ticks.
-           Serial.println("send fail");
-       }
-   }
-}
-void ui_task(void * p)
-{
-	ui_msg_t ui_msg;
-	while(1)
-	{
-	if( xQueueReceive( ui_queue, &( ui_msg ),portMAX_DELAY) )
- 		{
- 			//your code
-		}	
-	}
-}
-xTaskCreate(
-				  my_task, 		 /*任务函数*/
-				  "my_task",		 /*带任务名称的字符串*/
-				  20000,			/*堆栈大小，单位为字节*/
-				  NULL, 			/*作为任务输入传递的参数*/
-				  6,				/*任务的优先级*/
-				  NULL); 		 //TaskHandle_t * 
 
-xTaskCreate(
-             ui_task,          /*任务函数*/
-            "ui_task",        /*带任务名称的字符串*/
-             10000,            /*堆栈大小，单位为字节*/
-             NULL,             /*作为任务输入传递的参数*/
-             5,                /*任务的优先级*/
-             NULL); 				  
+
+
 </textarea>
 
 <p>
-定时器
-</p>   
-<textarea class="textarea-inherit" rows ="18";>
-void get_vol_timerhandle(void *p)
-{
-	//your code
-}
-get_vol_timer = xTimerCreate("get vol",
-							1000 / portTICK_PERIOD_MS,
-							pdTRUE,
-							NULL,
-							get_vol_timerhandle); 
-	
-xTimerStart(get_vol_timer, 1000 / portTICK_PERIOD_MS);//启动定时器
+LED操作
+</p> 
+<textarea class="textarea-inherit" rows ="48";>
+
+
+
+		
+</textarea>
+<p>
+mail
+</p> 
+<textarea class="textarea-inherit" rows ="25";>
+
+</textarea>
+
+<p>
+timer
+</p> 
+<textarea class="textarea-inherit" rows ="35";>
+
+
+</textarea>
+
+<p>
+nv
+</p> 
+<textarea class="textarea-inherit" rows ="28";>
+
+
+</textarea>
+
+<p>
+i2c
+</p> 
+<textarea class="textarea-inherit" rows ="56";>
 
 
 </textarea>
